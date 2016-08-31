@@ -1,10 +1,10 @@
-import { AngularwithreactPage } from './app.po';
+import { AngularwithreduxPage } from './app.po';
 
-describe('angularwithreact App', function() {
-  let page: AngularwithreactPage;
+describe('angularwithredux App', function() {
+  let page: AngularwithreduxPage;
 
   beforeEach(() => {
-    page = new AngularwithreactPage();
+    page = new AngularwithreduxPage();
   });
 
   it('should display message saying app works', () => {

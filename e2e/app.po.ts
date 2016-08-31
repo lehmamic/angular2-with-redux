@@ -1,6 +1,6 @@
 import { browser, element, by } from 'protractor/globals';
 
-export class AngularwithreactPage {
+export class AngularwithreduxPage {
   navigateTo() {
     return browser.get('/');
   }
