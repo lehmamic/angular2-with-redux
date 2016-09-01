@@ -2,15 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { createStore, Store, StoreEnhancer } from 'redux';
-import { NgRedux } from 'ng2-redux';
+import { NgRedux, DevToolsExtension } from 'ng2-redux';
 
-import { AppState  } from './shared';
+import { AppState,  } from './shared';
 import { AppComponent } from './app.component';
-import { CounterComponent, counterReducer } from './counter';
-
-let devtools: StoreEnhancer<AppState> = window['devToolsExtension'] ? window['devToolsExtension']() : f => f;
-let store: Store<AppState> = createStore<AppState>(counterReducer, devtools);
+import { CounterComponent, counterReducer, initialState } from './counter';
 
 @NgModule({
   declarations: [
@@ -22,11 +18,11 @@ let store: Store<AppState> = createStore<AppState>(counterReducer, devtools);
     FormsModule,
     HttpModule
   ],
-  providers: [NgRedux],
+  providers: [NgRedux, DevToolsExtension],
   bootstrap: [AppComponent]
 })
 export class AppModule {
-    constructor(private ngRedux: NgRedux<AppState>) {
-        this.ngRedux.provideStore(store);
+    constructor(private ngRedux: NgRedux<AppState>, private devTools: DevToolsExtension) {
+        this.ngRedux.configureStore(counterReducer, initialState, [], [devTools.enhancer()]);
     }
  }
