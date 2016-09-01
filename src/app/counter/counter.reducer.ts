@@ -2,7 +2,7 @@ import { AppState } from '../shared';
 import { Reducer, Action } from 'redux';
 import { INCREMENT, DECREMENT } from './counter-actions-creator';
 
-let initialState: AppState = { counter: 0 };
+export const initialState: AppState = { counter: 0 };
 
 export const counterReducer: Reducer<AppState> =
   (state: AppState = initialState, action: Action): AppState => {

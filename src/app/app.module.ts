@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, provide } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { createStore, Store, StoreEnhancer } from 'redux';
-import { AppStore, AppState  } from './shared';
+import { NgRedux } from 'ng2-redux';
 
+import { AppState  } from './shared';
 import { AppComponent } from './app.component';
 import { CounterComponent, counterReducer } from './counter';
 
@@ -21,7 +22,11 @@ let store: Store<AppState> = createStore<AppState>(counterReducer, devtools);
     FormsModule,
     HttpModule
   ],
-  providers: [provide(AppStore, { useValue: store })],
+  providers: [NgRedux],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+    constructor(private ngRedux: NgRedux<AppState>) {
+        this.ngRedux.provideStore(store);
+    }
+ }
