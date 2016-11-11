@@ -1,6 +1,7 @@
-import { Component, Inject } from '@angular/core';
-import { Store } from 'redux';
-import { AppStore, AppState } from '../shared';
+import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
+import { AppState } from '../shared';
 import * as CounterActions from './counter-actions-creator';
 
 @Component({
@@ -9,15 +10,9 @@ import * as CounterActions from './counter-actions-creator';
   styleUrls: ['./counter.component.scss']
 })
 export class CounterComponent {
-  counter: number;
-  constructor(@Inject(AppStore) private store: Store<AppState>) {
-    store.subscribe(() => this.readState());
-    this.readState();
-  }
-
-  readState(): void {
-    let state: AppState = this.store.getState() as AppState;
-    this.counter = state.counter;
+  counter: Observable<number>;
+  constructor(private store: Store<AppState>) {
+    this.counter = store.select('counter');
   }
 
   increment(): void {

@@ -1,10 +1,10 @@
 import { AppState } from '../shared';
-import { Reducer, Action } from 'redux';
+import { ActionReducer, Action } from '@ngrx/store';
 import { INCREMENT, DECREMENT } from './counter-actions-creator';
 
 let initialState: AppState = { counter: 0 };
 
-export const counterReducer: Reducer<AppState> =
+export const counterReducer: ActionReducer<AppState> =
   (state: AppState = initialState, action: Action): AppState => {
     switch (action.type) {
     case INCREMENT:
